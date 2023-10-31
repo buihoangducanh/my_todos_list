@@ -14,12 +14,14 @@ const TodoItem = ({ todo }) => {
   const { todosDispatch } = useContext(ToDosContext);
   const [editing, setEditing] = useState(false);
   const [input, setInput] = useState(todo.content);
+
   const handleDeleteTodo = (id) => {
     todosDispatch({
       type: DELETE_TODO,
       payload: id,
     });
   };
+
   const handleCompleteTodo = (id) => {
     todosDispatch({
       type: TOGGLE_COMPLETE_TODO,
@@ -31,6 +33,7 @@ const TodoItem = ({ todo }) => {
     if (!input) return;
     else {
       if (e.key === "Enter") {
+        setEditing(false);
         todosDispatch({
           type: EDIT_TODO,
           payload: {
@@ -43,15 +46,17 @@ const TodoItem = ({ todo }) => {
   };
   return (
     <span
-      // onDoubleClick={() => setEditing(true)}
+      onDoubleClick={() => setEditing(true)}
       onMouseLeave={() => setMouseEntered(false)}
       onMouseEnter={() => setMouseEntered(true)}
       className="item-container"
     >
-      <CircleCheckItem
-        onClick={() => handleCompleteTodo(todo.id)}
-        className={`icon-circle-check`}
-      />
+      {!editing && (
+        <CircleCheckItem
+          onClick={() => handleCompleteTodo(todo.id)}
+          className={`icon-circle-check`}
+        />
+      )}
 
       {todo.completed && (
         <CircleCheckedIcon
@@ -59,29 +64,32 @@ const TodoItem = ({ todo }) => {
           className={`icon-circle-checked`}
         />
       )}
-      <input
-        disabled
-        value={todo.content}
-        type="text"
-        className={`item-container__input ${todo.completed && `done`}`}
-      />
-      {mouseEntered && (
+      {!editing && (
+        <input
+          disabled
+          value={todo.content}
+          type="text"
+          className={`item-container__input ${todo.completed && `done`}`}
+        />
+      )}
+      {mouseEntered && !editing && (
         <i
           onClick={() => handleDeleteTodo(todo.id)}
           className="fi fi-bs-cross icon-delete"
         ></i>
       )}
-      {/* {editing && (
+      {editing && (
         <input
+          autoFocus
           onKeyUp={editTodoHandler}
           onChange={(e) => setInput(e.target.value)}
           value={input}
           type="text"
           className={`item-container__input ${todo.completed && `done`}`}
           // onFocus={() => setMouseEntered(true)}
-          // onBlur={() => setMouseEntered(false)}
+          onBlur={() => setEditing(false)}
         />
-      )} */}
+      )}
     </span>
   );
 };
