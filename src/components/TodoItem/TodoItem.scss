@@ -1,0 +1,56 @@
+@import "./../../../sass/variables.scss";
+$text-done: #e4dddd;
+
+@mixin check-button {
+  position: absolute;
+  top: 5.5rem;
+  left: -53rem;
+  cursor: pointer;
+}
+
+.item-container {
+  position: relative;
+  &__input {
+    width: 100%;
+    padding: 2rem;
+    padding-left: 7rem;
+    font-size: 2.5rem;
+    outline: none;
+    border: 0.05rem solid darken($color: $app-background-color, $amount: 10%);
+    border-top: none;
+    padding-right: 5.5rem;
+    &:disabled {
+      background-color: #fff;
+    }
+  }
+  .icon-circle-check {
+    @include check-button;
+
+    font-size: 4rem;
+    fill: darken($color: $app-background-color, $amount: 10%);
+  }
+  .icon-circle-checked {
+    @include check-button;
+    fill: green;
+    top: 5.2rem;
+    display: inline-block;
+    width: 3.2rem;
+    font-weight: 700;
+  }
+  .icon-delete {
+    position: absolute;
+    top: 6rem;
+    right: 2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #cc9a9a;
+  }
+}
+.done {
+  color: $text-done;
+  text-decoration: line-through;
+}
+.focus {
+  outline: $actions-text-color !important;
+}

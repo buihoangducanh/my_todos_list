@@ -1,0 +1,75 @@
+@import "./../../../sass/variables.scss";
+.actions {
+  max-width: 100%;
+  padding: 1.5rem 3rem;
+  color: $actions-text-color;
+  position: relative;
+  background-color: #fff;
+  &::after {
+    content: "";
+    width: 98%;
+    height: 100%;
+
+    position: absolute;
+    top: 0.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: -100;
+  }
+  &::before {
+    content: "";
+    width: 97%;
+    height: 100%;
+
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: -200;
+  }
+  &__items-left {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+  }
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    button {
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.3rem;
+      color: $actions-text-color;
+      background-color: #fff;
+      font-weight: 500;
+      font-size: 1.4rem;
+      &:hover {
+        border: 0.1rem solid $header-text-color;
+      }
+    }
+  }
+  .actions__clear-completed {
+    display: inline-block;
+    position: absolute;
+    font-size: 1.4rem;
+    right: 2rem;
+    bottom: 50%;
+    transform: translateY(50%);
+
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+.active {
+  border: 0.1rem solid $header-text-color !important;
+}
