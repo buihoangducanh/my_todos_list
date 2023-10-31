@@ -44,9 +44,13 @@ const TodoItem = ({ todo }) => {
       }
     }
   };
+  const handleDoubleClickToEdit = () => {
+    if (todo.completed) return;
+    setEditing(true);
+  };
   return (
     <span
-      onDoubleClick={() => setEditing(true)}
+      onDoubleClick={handleDoubleClickToEdit}
       onMouseLeave={() => setMouseEntered(false)}
       onMouseEnter={() => setMouseEntered(true)}
       className="item-container"
@@ -86,7 +90,6 @@ const TodoItem = ({ todo }) => {
           value={input}
           type="text"
           className={`item-container__input ${todo.completed && `done`}`}
-          // onFocus={() => setMouseEntered(true)}
           onBlur={() => setEditing(false)}
         />
       )}

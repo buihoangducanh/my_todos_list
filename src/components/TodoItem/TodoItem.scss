@@ -22,6 +22,10 @@ $text-done: #e4dddd;
     &:disabled {
       background-color: #fff;
     }
+    &:focus {
+      border: 1px solid #999;
+      box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+    }
   }
   .icon-circle-check {
     @include check-button;
@@ -50,7 +54,4 @@ $text-done: #e4dddd;
 .done {
   color: $text-done;
   text-decoration: line-through;
-}
-.focus {
-  outline: $actions-text-color !important;
 }
