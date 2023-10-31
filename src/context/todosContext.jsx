@@ -1,5 +1,5 @@
-import { useReducer } from "react";
-import { createContext } from "react";
+import { useReducer, useEffect, createContext } from "react";
+
 import {
   ADD_TODO,
   TOGGLE_COMPLETE_TODO,
@@ -51,7 +51,14 @@ const todosReducer = (state, action) => {
 };
 
 const TodoContextProvider = ({ children }) => {
-  const [todos, todosDispatch] = useReducer(todosReducer, []);
+  const [todos, todosDispatch] = useReducer(todosReducer, [], (initial) => {
+    const localData = localStorage.getItem("todos");
+    return localData ? JSON.parse(localData) : initial;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const valueToShare = {
     todos,
